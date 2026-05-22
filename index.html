@@ -203,6 +203,28 @@
       }
     }
 
+    @media (max-width: 899px) {
+      body.reveal-ready .page .slice {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity .7s ease, transform .7s ease;
+        will-change: opacity, transform;
+      }
+
+      body.reveal-ready .page .slice.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body.reveal-ready .page .slice {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    }
+
     @media (min-width: 900px) {
       body {
         min-height: 100vh;
@@ -295,10 +317,10 @@
       <button class="hotspot" type="button" data-modal="mail" style="left: 23%; top: 52%; width: 4%; height: 11%;" aria-label="メール問い合わせリンク"></button>
       <button class="hotspot" type="button" data-modal="services" style="left: 30%; top: 13%; width: 14%; height: 57%; border-radius: 8px;" aria-label="サービスリンク"></button>
       <button class="hotspot" type="button" data-modal="company" style="left: 46%; top: 13%; width: 14%; height: 52%; border-radius: 8px;" aria-label="運営者情報リンク"></button>
-      <button class="hotspot" type="button" data-modal="legal" style="left: 60%; top: 21%; width: 14%; height: 9%; border-radius: 8px;" aria-label="特定商取引法に基づく表記"></button>
-      <button class="hotspot" type="button" data-modal="privacy" style="left: 60%; top: 34%; width: 14%; height: 9%; border-radius: 8px;" aria-label="プライバシーポリシー"></button>
-      <button class="hotspot" type="button" data-modal="company" style="left: 60%; top: 46%; width: 14%; height: 9%; border-radius: 8px;" aria-label="利用規約"></button>
-      <button class="hotspot" type="button" data-modal="contact" style="left: 60%; top: 59%; width: 14%; height: 9%; border-radius: 8px;" aria-label="お問い合わせ"></button>
+      <button class="hotspot" type="button" data-modal="legal" style="left: 60%; top: 20%; width: 14%; height: 7%; border-radius: 8px;" aria-label="特定商取引法に基づく表記"></button>
+      <button class="hotspot" type="button" data-modal="privacy" style="left: 60%; top: 30%; width: 14%; height: 7%; border-radius: 8px;" aria-label="プライバシーポリシー"></button>
+      <button class="hotspot" type="button" data-modal="company" style="left: 60%; top: 40%; width: 14%; height: 7%; border-radius: 8px;" aria-label="利用規約"></button>
+      <button class="hotspot" type="button" data-modal="contact" style="left: 60%; top: 50%; width: 14%; height: 7%; border-radius: 8px;" aria-label="お問い合わせ"></button>
       <button class="hotspot" type="button" data-modal="contact" style="left: 76%; top: 63%; width: 20%; height: 12%;" aria-label="無料で相談してみる"></button>
     </section>
 
@@ -373,9 +395,10 @@
       <button class="hotspot" type="button" data-modal="mail" style="left: 28%; top: 44%; width: 5%; height: 10%;" aria-label="メール問い合わせリンク"></button>
       <button class="hotspot" type="button" data-modal="services" style="left: 29%; top: 12%; width: 16%; height: 48%; border-radius: 8px;" aria-label="サービスリンク"></button>
       <button class="hotspot" type="button" data-modal="company" style="left: 46%; top: 12%; width: 16%; height: 42%; border-radius: 8px;" aria-label="運営者情報リンク"></button>
-      <button class="hotspot" type="button" data-modal="legal" style="left: 59%; top: 18%; width: 13%; height: 8%; border-radius: 8px;" aria-label="特定商取引法に基づく表記"></button>
-      <button class="hotspot" type="button" data-modal="privacy" style="left: 59%; top: 27%; width: 13%; height: 8%; border-radius: 8px;" aria-label="プライバシーポリシー"></button>
-      <button class="hotspot" type="button" data-modal="contact" style="left: 59%; top: 36%; width: 13%; height: 8%; border-radius: 8px;" aria-label="お問い合わせ"></button>
+      <button class="hotspot" type="button" data-modal="legal" style="left: 59%; top: 18.5%; width: 13%; height: 5.5%; border-radius: 8px;" aria-label="特定商取引法に基づく表記"></button>
+      <button class="hotspot" type="button" data-modal="privacy" style="left: 59%; top: 25%; width: 13%; height: 5.5%; border-radius: 8px;" aria-label="プライバシーポリシー"></button>
+      <button class="hotspot" type="button" data-modal="company" style="left: 59%; top: 31.5%; width: 13%; height: 5.5%; border-radius: 8px;" aria-label="利用規約"></button>
+      <button class="hotspot" type="button" data-modal="contact" style="left: 59%; top: 38%; width: 13%; height: 5.5%; border-radius: 8px;" aria-label="お問い合わせ"></button>
       <div class="sr-only">
         <h2 id="final-title">まずは無料でご相談ください</h2>
         <p>あなたのお店に合ったご提案をいたします。無料相談ボタンから問い合わせフォームへ進みます。フッターにはサービス、会社情報、お問い合わせへのリンクがあります。</p>
@@ -487,6 +510,38 @@
     const closeButtons = backdrop.querySelectorAll(".modal-close, .modal-action");
     let lastFocused = null;
 
+    function setupMobileReveal() {
+      const slices = document.querySelectorAll(".page .slice");
+      if (!slices.length) return;
+
+      document.body.classList.add("reveal-ready");
+
+      if (!("IntersectionObserver" in window)) {
+        slices.forEach((slice) => slice.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.18
+      });
+
+      slices.forEach((slice, index) => {
+        if (index === 0) {
+          slice.classList.add("is-visible");
+        }
+        observer.observe(slice);
+      });
+    }
+
     function openModal(kind) {
       const copy = modalCopy[kind] || modalCopy.contact;
       lastFocused = document.activeElement;
@@ -529,6 +584,8 @@
         closeModal();
       }
     });
+
+    setupMobileReveal();
   </script>
 </body>
 </html>

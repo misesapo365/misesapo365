@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ミセサポ365 | SNSが得意なアルバイトを月額3万円から</title>
+  <meta name="description" content="地域の飲食店や中小企業向けに、ホームページ制作、SNS運用、MEO対策、口コミ対応、写真・動画制作、レポート改善提案をまるっとサポートします。">
+  <style>
+    :root {
+      --canvas: 430px;
+      --brand: #f7b500;
+      --accent: #ff7a1a;
+      --ink: #171717;
+      --paper: #fffdf7;
+      --shadow: 0 18px 50px rgba(34, 28, 10, .18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: #f4f1e9;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    }
+
+    body {
+      padding-bottom: calc(74px + env(safe-area-inset-bottom));
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100%, var(--canvas));
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 34px rgba(0, 0, 0, .08);
+      position: relative;
+    }
+
+    .desktop-page {
+      display: none;
+    }
+
+    .slice {
+      position: relative;
+      line-height: 0;
+      background: #fff;
+    }
+
+    .slice img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      border: 0;
+    }
+
+    .hotspot {
+      position: absolute;
+      display: block;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(247, 181, 0, .18);
+    }
+
+    .hotspot:focus-visible,
+    .fixed-cta:focus-visible,
+    .modal-close:focus-visible,
+    .modal-action:focus-visible {
+      outline: 3px solid rgba(255, 122, 26, .8);
+      outline-offset: 3px;
+    }
+
+    .fixed-cta {
+      position: fixed;
+      left: 50%;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      z-index: 20;
+      width: min(calc(100% - 28px), 390px);
+      min-height: 52px;
+      transform: translateX(-50%);
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ff8b24 0%, #f26518 100%);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0;
+      box-shadow: 0 12px 28px rgba(242, 101, 24, .35);
+      cursor: pointer;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(17, 17, 17, .44);
+    }
+
+    .modal-backdrop.is-open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(100%, 380px);
+      border-radius: 22px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid rgba(247, 181, 0, .24);
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .modal-close {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: #fff2c2;
+      color: #222;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 16px 18px 20px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .modal-body p {
+      margin: 0 0 14px;
+    }
+
+    .modal-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 46px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 700px) {
+      body {
+        padding-top: 24px;
+        padding-bottom: 98px;
+      }
+
+      .page {
+        border-radius: 18px 18px 0 0;
+        overflow: hidden;
+      }
+    }
+
+    @media (min-width: 900px) {
+      body {
+        min-height: 100vh;
+        padding: 0;
+        display: block;
+      }
+
+      .page,
+      .fixed-cta {
+        display: none;
+      }
+
+      .desktop-page {
+        display: block;
+        position: relative;
+        width: min(100%, 2172px);
+        margin: 0 auto;
+        padding: 0;
+        background: #fffdf7;
+        box-shadow: none;
+      }
+
+      .desktop-section {
+        position: relative;
+        line-height: 0;
+      }
+
+      .desktop-section + .desktop-section {
+        margin-top: 0;
+      }
+
+      .desktop-section img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+      }
+
+      .desktop-header {
+        margin-bottom: 0;
+      }
+
+      .desktop-header img {
+        border-radius: 0;
+      }
+
+      .desktop-footer img {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="desktop-page" aria-label="ミセサポ365 PC用ランディングページ">
+    <section class="desktop-section desktop-header" aria-labelledby="desktop-fv-title">
+      <img src="assets_pc/pc_01_first_view.png" width="1774" height="887" alt="">
+      <button class="hotspot" type="button" data-modal="menu" style="left: 92%; top: 2%; width: 7%; height: 13%;" aria-label="メニューを開く"></button>
+      <button class="hotspot" type="button" data-modal="instagram" style="left: 61%; top: 16%; width: 7%; height: 12%;" aria-label="Instagramの案内を開く"></button>
+      <button class="hotspot" type="button" data-modal="line" style="left: 44%; top: 41%; width: 7%; height: 12%;" aria-label="LINE相談の案内を開く"></button>
+      <button class="hotspot" type="button" data-modal="tiktok" style="left: 91%; top: 28%; width: 7%; height: 12%;" aria-label="TikTok運用の案内を開く"></button>
+      <button class="hotspot" type="button" data-modal="maps" style="left: 91%; top: 64%; width: 7%; height: 13%;" aria-label="Googleマップ対策の案内を開く"></button>
+    </section>
+
+    <section class="desktop-section" aria-labelledby="desktop-problem-title">
+      <img src="assets_pc/pc_02_problem.png" width="2172" height="724" alt="">
+      <button class="hotspot" type="button" data-modal="consultation" style="left: 2%; top: 8%; width: 96%; height: 84%; border-radius: 20px;" aria-label="お悩み相談の案内を開く"></button>
+    </section>
+
+    <section class="desktop-section" aria-labelledby="desktop-benefit-title">
+      <img src="assets_pc/pc_03_services.png" width="2172" height="724" alt="">
+      <button class="hotspot" type="button" data-modal="services" style="left: 3%; top: 20%; width: 94%; height: 70%; border-radius: 18px;" aria-label="ミセサポ365ができることの詳細を開く"></button>
+    </section>
+
+    <section class="desktop-section" aria-labelledby="desktop-price-title">
+      <img src="assets_pc/pc_04_price.png" width="2172" height="724" alt="">
+      <button class="hotspot" type="button" data-modal="price" style="left: 1%; top: 4%; width: 98%; height: 90%; border-radius: 18px;" aria-label="料金プランについて"></button>
+    </section>
+
+    <section class="desktop-section" aria-labelledby="desktop-flow-title">
+      <img src="assets_pc/pc_05_flow.png" width="2172" height="724" alt="">
+      <button class="hotspot" type="button" data-modal="flow" style="left: 2%; top: 23%; width: 96%; height: 70%; border-radius: 18px;" aria-label="ご利用の流れを開く"></button>
+    </section>
+
+    <section class="desktop-section desktop-footer" aria-labelledby="desktop-final-title">
+      <img src="assets_pc/pc_06_footer.png" width="2172" height="724" alt="">
+      <button class="hotspot" type="button" data-modal="instagram" style="left: 3%; top: 52%; width: 4%; height: 11%;" aria-label="Instagramリンク"></button>
+      <button class="hotspot" type="button" data-modal="line" style="left: 8%; top: 52%; width: 4%; height: 11%;" aria-label="LINEリンク"></button>
+      <button class="hotspot" type="button" data-modal="tiktok" style="left: 13%; top: 52%; width: 4%; height: 11%;" aria-label="TikTokリンク"></button>
+      <button class="hotspot" type="button" data-modal="maps" style="left: 18%; top: 52%; width: 4%; height: 11%;" aria-label="Googleマップリンク"></button>
+      <button class="hotspot" type="button" data-modal="mail" style="left: 23%; top: 52%; width: 4%; height: 11%;" aria-label="メール問い合わせリンク"></button>
+      <button class="hotspot" type="button" data-modal="services" style="left: 30%; top: 13%; width: 14%; height: 57%; border-radius: 8px;" aria-label="サービスリンク"></button>
+      <button class="hotspot" type="button" data-modal="company" style="left: 46%; top: 13%; width: 14%; height: 52%; border-radius: 8px;" aria-label="運営者情報リンク"></button>
+      <button class="hotspot" type="button" data-modal="legal" style="left: 60%; top: 21%; width: 14%; height: 9%; border-radius: 8px;" aria-label="特定商取引法に基づく表記"></button>
+      <button class="hotspot" type="button" data-modal="privacy" style="left: 60%; top: 34%; width: 14%; height: 9%; border-radius: 8px;" aria-label="プライバシーポリシー"></button>
+      <button class="hotspot" type="button" data-modal="company" style="left: 60%; top: 46%; width: 14%; height: 9%; border-radius: 8px;" aria-label="利用規約"></button>
+      <button class="hotspot" type="button" data-modal="contact" style="left: 60%; top: 59%; width: 14%; height: 9%; border-radius: 8px;" aria-label="お問い合わせ"></button>
+      <button class="hotspot" type="button" data-modal="contact" style="left: 76%; top: 63%; width: 20%; height: 12%;" aria-label="無料で相談してみる"></button>
+    </section>
+
+    <div class="sr-only">
+      <h1 id="desktop-fv-title">SNSが得意なアルバイトを月額3万円から雇いませんか？</h1>
+      <h2 id="desktop-problem-title">こんなお悩みありませんか？</h2>
+      <h2 id="desktop-benefit-title">ミセサポ365ができること</h2>
+      <h2 id="desktop-price-title">毎月のサポートが月額3万円から</h2>
+      <h2 id="desktop-flow-title">ご利用の流れ</h2>
+      <h2 id="desktop-final-title">まずは無料でご相談ください</h2>
+      <p>PC表示では、ヘッダー、悩みの共感、できること、月額3万円から、ご利用の流れ、フッターの順にスクロールして閲覧できます。</p>
+    </div>
+  </main>
+
+  <main class="page" aria-label="ミセサポ365 ランディングページ">
+    <section class="slice" aria-labelledby="fv-title">
+      <img src="assets/01_first_view.png" width="1726" height="1000" alt="">
+      <button class="hotspot" type="button" data-modal="menu" style="left: 89%; top: 3%; width: 9%; height: 15%;" aria-label="メニューを開く"></button>
+      <button class="hotspot" type="button" data-modal="instagram" style="left: 58%; top: 9%; width: 8%; height: 13%;" aria-label="Instagramの案内を開く"></button>
+      <button class="hotspot" type="button" data-modal="line" style="left: 42%; top: 23%; width: 8%; height: 12%;" aria-label="LINE相談の案内を開く"></button>
+      <button class="hotspot" type="button" data-modal="tiktok" style="left: 88%; top: 22%; width: 8%; height: 13%;" aria-label="TikTok運用の案内を開く"></button>
+      <button class="hotspot" type="button" data-modal="maps" style="left: 90%; top: 39%; width: 8%; height: 12%;" aria-label="Googleマップ対策の案内を開く"></button>
+      <div class="sr-only">
+        <h1 id="fv-title">SNSが得意なアルバイトを月額3万円から雇いませんか？</h1>
+        <p>ミセサポ365は、お店のめんどうくさいことをまるっとサポートします。ホームページ制作からSNS運用、口コミ対応まで、お店の面倒ごとを引き受けます。</p>
+      </div>
+    </section>
+
+    <section class="slice" aria-labelledby="problem-title">
+      <img src="assets/03_problem_recommend.png" width="1726" height="440" alt="">
+      <button class="hotspot" type="button" data-modal="consultation" style="left: 28%; top: 22%; width: 68%; height: 66%; border-radius: 16px;" aria-label="お悩み相談の案内を開く"></button>
+      <div class="sr-only">
+        <h2 id="problem-title">こんなお悩みありませんか？</h2>
+        <p>SNSをやりたいけど時間がない、何を投稿すればよいかわからない、口コミやGoogleマップ対応が大変、本業が忙しくて手が回らない、外注は高いしコンサルはピンとこない、誰かにまるっと任せたい方におすすめです。</p>
+      </div>
+    </section>
+
+    <section class="slice" aria-labelledby="benefit-title">
+      <img src="assets/04_benefits_services.png" width="1726" height="496" alt="">
+      <button class="hotspot" type="button" data-modal="services" style="left: 3%; top: 22%; width: 94%; height: 68%; border-radius: 18px;" aria-label="ミセサポ365ができることの詳細を開く"></button>
+      <div class="sr-only">
+        <h2 id="benefit-title">ミセサポ365ができること</h2>
+        <p>AIを活用したホームページ制作、投稿作成やスケジュール管理を含むSNS運用代行、GoogleマップのMEO対策、口コミ返信サポート、写真撮影やデザイン、月1回のレポートと改善提案を行います。</p>
+      </div>
+    </section>
+
+    <section class="slice" aria-labelledby="price-title">
+      <img src="assets/05_price_offer.png" width="1726" height="662" alt="">
+      <button class="hotspot" type="button" data-modal="price" style="left: 3%; top: 10%; width: 94%; height: 80%; border-radius: 18px;" aria-label="料金プランについて"></button>
+      <div class="sr-only">
+        <h2 id="price-title">毎月のサポートが月額3万円から</h2>
+        <p>いつでも相談OK、初期費用0円、契約期間は応相談。サポート内容やボリュームに応じて柔軟に対応します。</p>
+      </div>
+    </section>
+
+    <section class="slice" aria-labelledby="flow-title">
+      <img src="assets/06_flow.png" width="1726" height="392" alt="">
+      <button class="hotspot" type="button" data-modal="flow" style="left: 3%; top: 27%; width: 94%; height: 61%; border-radius: 16px;" aria-label="ご利用の流れを開く"></button>
+      <div class="sr-only">
+        <h2 id="flow-title">ご利用の流れ</h2>
+        <p>無料相談、お見積り、サポート開始、レポート・改善の4ステップで進みます。お店に合ったサポート内容を提案し、効果を見える化して改善提案まで行います。</p>
+      </div>
+    </section>
+
+    <section class="slice" aria-labelledby="final-title">
+      <img src="assets/07_final_cta_footer.png" width="1726" height="757" alt="">
+      <button class="hotspot" type="button" data-modal="contact" style="left: 74%; top: 39%; width: 22%; height: 11%;" aria-label="無料で相談してみる"></button>
+      <button class="hotspot" type="button" data-modal="instagram" style="left: 4%; top: 44%; width: 5%; height: 10%;" aria-label="Instagramリンク"></button>
+      <button class="hotspot" type="button" data-modal="line" style="left: 10%; top: 44%; width: 5%; height: 10%;" aria-label="LINEリンク"></button>
+      <button class="hotspot" type="button" data-modal="tiktok" style="left: 16%; top: 44%; width: 5%; height: 10%;" aria-label="TikTokリンク"></button>
+      <button class="hotspot" type="button" data-modal="maps" style="left: 22%; top: 44%; width: 5%; height: 10%;" aria-label="Googleマップリンク"></button>
+      <button class="hotspot" type="button" data-modal="mail" style="left: 28%; top: 44%; width: 5%; height: 10%;" aria-label="メール問い合わせリンク"></button>
+      <button class="hotspot" type="button" data-modal="services" style="left: 29%; top: 12%; width: 16%; height: 48%; border-radius: 8px;" aria-label="サービスリンク"></button>
+      <button class="hotspot" type="button" data-modal="company" style="left: 46%; top: 12%; width: 16%; height: 42%; border-radius: 8px;" aria-label="運営者情報リンク"></button>
+      <button class="hotspot" type="button" data-modal="legal" style="left: 59%; top: 18%; width: 13%; height: 8%; border-radius: 8px;" aria-label="特定商取引法に基づく表記"></button>
+      <button class="hotspot" type="button" data-modal="privacy" style="left: 59%; top: 27%; width: 13%; height: 8%; border-radius: 8px;" aria-label="プライバシーポリシー"></button>
+      <button class="hotspot" type="button" data-modal="contact" style="left: 59%; top: 36%; width: 13%; height: 8%; border-radius: 8px;" aria-label="お問い合わせ"></button>
+      <div class="sr-only">
+        <h2 id="final-title">まずは無料でご相談ください</h2>
+        <p>あなたのお店に合ったご提案をいたします。無料相談ボタンから問い合わせフォームへ進みます。フッターにはサービス、会社情報、お問い合わせへのリンクがあります。</p>
+      </div>
+    </section>
+  </main>
+
+  <button class="fixed-cta" type="button" data-modal="contact">無料で相談してみる</button>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText">
+      <div class="modal-head">
+        <h2 class="modal-title" id="modalTitle">無料相談</h2>
+        <button class="modal-close" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalText">リンク先が未設定です。HTML化時の仮モーダルとして表示しています。</p>
+        <button class="modal-action" type="button">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modalCopy = {
+      contact: {
+        title: "無料相談フォーム",
+        text: "ここに問い合わせフォーム、LINE、予約ページなどの確定URLを接続できます。今は仮モーダルとして表示しています。"
+      },
+      menu: {
+        title: "メニュー",
+        text: "サービス、料金、ご利用の流れ、お問い合わせへのページ内リンクや外部URLをここに設定できます。"
+      },
+      instagram: {
+        title: "Instagram運用",
+        text: "Instagramアカウントや投稿事例へのリンクを設定できます。"
+      },
+      line: {
+        title: "LINE相談",
+        text: "LINE公式アカウントの友だち追加URLが決まったら、このボタンに接続できます。"
+      },
+      tiktok: {
+        title: "TikTok運用",
+        text: "TikTok投稿やショート動画制作の事例ページ、動画URLを設定できます。"
+      },
+      maps: {
+        title: "Googleマップ対策",
+        text: "MEO対策、Googleビジネスプロフィール、地図リンクなどを設定できます。"
+      },
+      website: {
+        title: "ホームページ制作",
+        text: "AIを活用して、早く・安く・きれいに。スマホ対応までまるっとサポートする想定の詳細枠です。"
+      },
+      sns: {
+        title: "SNS運用・更新",
+        text: "投稿作成、スケジュール管理、運用代行の詳細ページや相談導線を接続できます。"
+      },
+      meo: {
+        title: "MEO対策・口コミ対応",
+        text: "検索で見つかるお店づくり、投稿、写真更新、口コミ対応までつなげる案内枠です。"
+      },
+      review: {
+        title: "口コミ対応・管理",
+        text: "口コミ返信、管理、自動アシスタント支援などの詳細を表示できます。"
+      },
+      photo: {
+        title: "写真・動画・投稿制作",
+        text: "撮影、デザイン、動画制作、投稿制作の事例や依頼フォームを接続できます。"
+      },
+      report: {
+        title: "レポート・改善提案",
+        text: "月1回のレポート、効果の見える化、改善提案の説明ページへ接続できます。"
+      },
+      consultation: {
+        title: "お悩み相談",
+        text: "SNSの時間がない、投稿内容がわからない、口コミ対応が大変といった悩みを相談できます。"
+      },
+      services: {
+        title: "ミセサポ365ができること",
+        text: "ホームページ制作、SNS運用代行、MEO対策、口コミ対応、写真・動画制作、改善提案をまとめて案内する枠です。"
+      },
+      price: {
+        title: "料金について",
+        text: "月額3万円から、初期費用0円、契約期間はご相談のうえ設定します。正式な料金表や見積もりフォームを接続できます。"
+      },
+      flow: {
+        title: "ご利用の流れ",
+        text: "無料相談、ご提案・お見積り、サポート開始、レポート・改善の流れを説明する詳細枠です。"
+      },
+      mail: {
+        title: "メール問い合わせ",
+        text: "問い合わせ用メールアドレスやメールフォームのURLが決まったら接続できます。"
+      },
+      company: {
+        title: "会社情報",
+        text: "会社概要、プライバシーポリシー、特定商取引法に基づく表記へのリンクを設定できます。"
+      }
+    };
+
+    const directLinks = {
+      contact: "contact.html",
+      mail: "contact.html",
+      privacy: "privacy.html",
+      legal: "legal.html"
+    };
+
+    const backdrop = document.getElementById("modalBackdrop");
+    const title = document.getElementById("modalTitle");
+    const text = document.getElementById("modalText");
+    const closeButtons = backdrop.querySelectorAll(".modal-close, .modal-action");
+    let lastFocused = null;
+
+    function openModal(kind) {
+      const copy = modalCopy[kind] || modalCopy.contact;
+      lastFocused = document.activeElement;
+      title.textContent = copy.title;
+      text.textContent = copy.text;
+      backdrop.classList.add("is-open");
+      backdrop.setAttribute("aria-hidden", "false");
+      backdrop.querySelector(".modal-close").focus();
+    }
+
+    function closeModal() {
+      backdrop.classList.remove("is-open");
+      backdrop.setAttribute("aria-hidden", "true");
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+    document.querySelectorAll("[data-modal]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const link = directLinks[button.dataset.modal];
+        if (link) {
+          window.location.href = link;
+          return;
+        }
+        openModal(button.dataset.modal);
+      });
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", closeModal);
+    });
+
+    backdrop.addEventListener("click", (event) => {
+      if (event.target === backdrop) closeModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && backdrop.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

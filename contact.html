@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>お問い合わせ・無料相談 | ミセサポ365</title>
+  <meta name="description" content="ミセサポ365へのお問い合わせ・無料相談フォームです。店舗名、メールアドレス、電話番号、ご相談内容を送信できます。">
+  <style>
+    :root {
+      --accent: #ff7a1a;
+      --ink: #171717;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: #f4f1e9;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    }
+    .page {
+      position: relative;
+      width: min(100%, 1672px);
+      margin: 0 auto;
+      line-height: 0;
+      background: #fffdf7;
+    }
+    .page img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 0;
+    }
+    .mobile-image {
+      display: none !important;
+    }
+    .hotspot,
+    .send-button {
+      position: absolute;
+      display: block;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(247, 181, 0, .2);
+    }
+    .hotspot:focus-visible,
+    .field:focus-visible,
+    .send-button:focus-visible {
+      outline: 3px solid rgba(255, 122, 26, .8);
+      outline-offset: 3px;
+    }
+    .field {
+      position: absolute;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .86);
+      color: #222;
+      font: 600 clamp(12px, 1.18vw, 20px)/1.4 inherit;
+      letter-spacing: 0;
+      padding: .45em .8em;
+      box-shadow: none;
+    }
+    textarea.field {
+      resize: none;
+      line-height: 1.6;
+    }
+    .field::placeholder {
+      color: #b7b7b7;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(17, 17, 17, .44);
+    }
+    .modal-backdrop.is-open {
+      display: grid;
+    }
+    .modal {
+      width: min(100%, 420px);
+      border-radius: 22px;
+      background: #fffdf7;
+      box-shadow: 0 18px 50px rgba(34, 28, 10, .18);
+      overflow: hidden;
+    }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid rgba(247, 181, 0, .24);
+    }
+    .modal-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+    .modal-close {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: #fff2c2;
+      color: #222;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .modal-body {
+      padding: 16px 18px 20px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .modal-body p {
+      margin: 0;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    @media (max-width: 699px) {
+      .page {
+        width: min(100%, 430px);
+      }
+      .pc-image {
+        display: none !important;
+      }
+      .mobile-image {
+        display: block !important;
+      }
+      .home-hotspot {
+        left: 3% !important;
+        top: 1% !important;
+        width: 42% !important;
+        height: 6.5% !important;
+      }
+      .menu-hotspot {
+        left: 87% !important;
+        top: .8% !important;
+        width: 11% !important;
+        height: 6.2% !important;
+      }
+      .field {
+        border-radius: 8px;
+        font-size: clamp(13px, 3.2vw, 16px);
+        padding: .35em .65em;
+      }
+      .field-name {
+        left: 31.2% !important;
+        top: 44.2% !important;
+        width: 61% !important;
+        height: 4.5% !important;
+      }
+      .field-store {
+        left: 31.2% !important;
+        top: 50.2% !important;
+        width: 61% !important;
+        height: 4.5% !important;
+      }
+      .field-email {
+        left: 31.2% !important;
+        top: 56.2% !important;
+        width: 61% !important;
+        height: 4.5% !important;
+      }
+      .field-tel {
+        left: 31.2% !important;
+        top: 62.2% !important;
+        width: 61% !important;
+        height: 4.5% !important;
+      }
+      .field-message {
+        left: 31.2% !important;
+        top: 68.2% !important;
+        width: 61% !important;
+        height: 9.6% !important;
+      }
+      .contact-submit {
+        left: 8% !important;
+        top: 79.4% !important;
+        width: 84.5% !important;
+        height: 6.4% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-labelledby="page-title">
+    <img class="pc-image" src="assets_pc/page_contact.png" width="1672" height="941" alt="">
+    <img class="mobile-image" src="assets/page_contact_mobile.png" width="941" height="1672" alt="">
+    <a class="hotspot home-hotspot" href="index.html" style="left: 2%; top: 2%; width: 32%; height: 9%;" aria-label="トップページへ戻る"></a>
+    <button class="hotspot menu-hotspot" type="button" style="left: 93%; top: 2%; width: 6%; height: 11%;" aria-label="メニュー"></button>
+
+    <form id="contactForm" aria-label="お問い合わせフォーム">
+      <input class="field field-name" name="name" autocomplete="name" required placeholder="例）山田 太郎" style="left: 69.3%; top: 19.3%; width: 23.2%; height: 5.4%;">
+      <input class="field field-store" name="store" autocomplete="organization" required placeholder="例）カフェ ミセサポ" style="left: 69.3%; top: 27.3%; width: 23.2%; height: 5.4%;">
+      <input class="field field-email" name="email" type="email" autocomplete="email" required placeholder="例）info@misesapo365.jp" style="left: 69.3%; top: 35.4%; width: 23.2%; height: 5.4%;">
+      <input class="field field-tel" name="tel" type="tel" autocomplete="tel" required placeholder="例）090-1234-5678" style="left: 69.3%; top: 43.4%; width: 23.2%; height: 5.4%;">
+      <textarea class="field field-message" name="message" required placeholder="ご相談内容を入力してください" style="left: 69.3%; top: 51.4%; width: 23.2%; height: 14.6%;"></textarea>
+      <button class="send-button contact-submit" type="submit" style="left: 59.5%; top: 69.5%; width: 33%; height: 9%;" aria-label="無料相談を送信する">無料相談を送信する</button>
+    </form>
+
+    <div class="sr-only">
+      <h1 id="page-title">お問い合わせ・無料相談</h1>
+      <p>お名前、店舗名、メールアドレス、電話番号、ご相談内容を入力して送信できます。</p>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText">
+      <div class="modal-head">
+        <h2 class="modal-title" id="modalTitle">送信設定が未完了です</h2>
+        <button class="modal-close" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalText">Googleフォームの送信URLと項目IDを設定すると、このフォームからGmail通知を受け取れるようになります。</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GOOGLE_FORM_ACTION = "";
+    const GOOGLE_FORM_FIELDS = {
+      name: "",
+      store: "",
+      email: "",
+      tel: "",
+      message: ""
+    };
+
+    const form = document.getElementById("contactForm");
+    const backdrop = document.getElementById("modalBackdrop");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+
+    function openModal(title, text) {
+      modalTitle.textContent = title;
+      modalText.textContent = text;
+      backdrop.classList.add("is-open");
+      backdrop.setAttribute("aria-hidden", "false");
+      backdrop.querySelector(".modal-close").focus();
+    }
+
+    function closeModal() {
+      backdrop.classList.remove("is-open");
+      backdrop.setAttribute("aria-hidden", "true");
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const missingSetting = !GOOGLE_FORM_ACTION || Object.values(GOOGLE_FORM_FIELDS).some((value) => !value);
+      if (missingSetting) {
+        openModal("送信設定が未完了です", "Googleフォームの送信URLと項目IDを設定すると、このフォームからGmail通知を受け取れるようになります。");
+        return;
+      }
+
+      const values = new FormData(form);
+      const payload = new FormData();
+      Object.entries(GOOGLE_FORM_FIELDS).forEach(([name, entryId]) => {
+        payload.append(entryId, values.get(name) || "");
+      });
+
+      try {
+        await fetch(GOOGLE_FORM_ACTION, {
+          method: "POST",
+          mode: "no-cors",
+          body: payload
+        });
+        form.reset();
+        openModal("送信しました", "お問い合わせありがとうございます。内容を確認のうえ、担当者よりご連絡します。");
+      } catch {
+        openModal("送信できませんでした", "時間をおいて再度お試しください。お急ぎの場合は、メールまたはLINEからお問い合わせください。");
+      }
+    });
+
+    backdrop.addEventListener("click", (event) => {
+      if (event.target === backdrop) closeModal();
+    });
+
+    backdrop.querySelector(".modal-close").addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && backdrop.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

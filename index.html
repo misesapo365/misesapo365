@@ -50,6 +50,10 @@
       display: none;
     }
 
+    .mobile-page {
+      display: none;
+    }
+
     .slice {
       position: relative;
       line-height: 0;
@@ -204,20 +208,631 @@
     }
 
     @media (max-width: 899px) {
-      body.reveal-ready .page .slice {
+      .page {
+        display: none;
+      }
+
+      .mobile-page {
+        display: block;
+        width: min(100%, var(--canvas));
+        margin: 0 auto;
+        background: #fff;
+        box-shadow: 0 0 34px rgba(0, 0, 0, .08);
+      }
+
+      .mobile-section {
+        position: relative;
+        min-height: min(760px, calc(100svh - 16px));
+        overflow: visible;
+        background: #fffdf7;
+        line-height: normal;
+        border-bottom: 1px solid rgba(247, 181, 0, .16);
+      }
+
+      .mobile-section img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border: 0;
+      }
+
+      .mobile-section-image {
+        width: 100%;
+        background: #fffdf7;
+        line-height: 0;
+      }
+
+      .mobile-section-image img {
+        width: 100%;
+        height: auto;
+      }
+
+      .mobile-hero {
+        min-height: auto;
+      }
+
+      .mobile-image-section {
+        min-height: auto;
+        padding: 0;
+        background: #fffdf7;
+      }
+
+      .mobile-section.mobile-image-section {
+        padding: 0;
+      }
+
+      .mobile-image-section img {
+        display: block;
+      }
+
+      .mobile-image-wrap {
+        position: relative;
+        line-height: 0;
+      }
+
+      .mobile-image-hotspot {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        padding: 0;
+        border: 0;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0);
+        color: transparent;
+        font-size: 0;
+        cursor: pointer;
+        appearance: none;
+        -webkit-tap-highlight-color: rgba(247, 181, 0, .16);
+      }
+
+      .mobile-problem,
+      .mobile-services {
+        min-height: auto;
+        padding: 0;
+      }
+
+      .mobile-price {
+        min-height: auto;
+        padding: 0;
+        background: #fff;
+      }
+
+      .mobile-flow {
+        min-height: auto;
+        padding: 0;
+        line-height: normal;
+        background: #fffdf7;
+      }
+
+      .mobile-flow h2 {
+        margin: 0 0 28px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+
+      .mobile-flow h2::before,
+      .mobile-flow h2::after {
+        content: "";
+        display: inline-block;
+        width: 20px;
+        height: 2px;
+        margin: 0 10px 7px;
+        background: var(--brand);
+        transform: rotate(35deg);
+      }
+
+      .mobile-flow h2::after {
+        transform: rotate(-35deg);
+      }
+
+      .flow-card {
+        position: relative;
+        display: grid;
+        gap: 8px;
+        min-height: auto;
+        margin: 0 0 18px;
+        padding: 18px 18px 20px;
+        border: 1.5px solid rgba(247, 181, 0, .58);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .flow-card::after {
+        content: ">";
+        position: absolute;
+        left: 50%;
+        bottom: -24px;
+        transform: translateX(-50%) rotate(90deg);
+        color: var(--brand);
+        font-size: 34px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .flow-card:last-child::after {
+        display: none;
+      }
+
+      .flow-step {
+        width: fit-content;
+        padding: 4px 9px;
+        border-radius: 5px;
+        background: var(--brand);
+        color: #111;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .flow-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 1.35;
+      }
+
+      .flow-card p {
+        margin: 0;
+        font-size: 14.5px;
+        font-weight: 700;
+        line-height: 1.75;
+      }
+
+      .mobile-footer {
+        min-height: auto;
+        padding: 0;
+      }
+
+      .mobile-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 16px 11px;
+        border-bottom: 1px solid rgba(0, 0, 0, .08);
+        background: #fffdf7;
+      }
+
+      .mobile-brandline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .mobile-brand {
+        font-size: clamp(19px, 5.4vw, 22px);
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .mobile-brand-divider {
+        width: 2px;
+        height: 34px;
+        background: rgba(17, 17, 17, .78);
+      }
+
+      .mobile-tagline {
+        margin: 0;
+        padding-left: 0;
+        border-left: 2px solid rgba(17, 17, 17, .75);
+        border-left: 0;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+
+      .mobile-menu {
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background: #f7b500;
+        color: #111;
+      }
+
+      .mobile-menu-lines,
+      .mobile-menu-lines::before,
+      .mobile-menu-lines::after {
+        display: block;
+        width: 21px;
+        height: 3px;
+        border-radius: 999px;
+        background: #111;
+      }
+
+      .mobile-menu-lines {
+        position: relative;
+      }
+
+      .mobile-menu-lines::before,
+      .mobile-menu-lines::after {
+        content: "";
+        position: absolute;
+        left: 0;
+      }
+
+      .mobile-menu-lines::before {
+        top: -7px;
+      }
+
+      .mobile-menu-lines::after {
+        top: 7px;
+      }
+
+      .mobile-hero-body {
+        padding: 24px 22px 26px;
+      }
+
+      .mobile-eyebrow {
+        display: inline-block;
+        margin: 0 0 18px;
+        padding-bottom: 7px;
+        border-bottom: 2px solid var(--brand);
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1.45;
+      }
+
+      .mobile-hero-title {
+        margin: 0;
+        font-size: clamp(27px, 8vw, 34px);
+        font-weight: 900;
+        line-height: 1.22;
+        letter-spacing: 0;
+      }
+
+      .mobile-hero-title strong {
+        color: var(--brand);
+        font-size: 1.2em;
+      }
+
+      .mobile-lead {
+        margin: 16px 0 0;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.75;
+      }
+
+      .mobile-hero-visual {
+        position: relative;
+        height: clamp(250px, 64vw, 310px);
+        margin: 18px 0 0;
+        overflow: hidden;
+        border-bottom: 2px solid rgba(17, 17, 17, .9);
+      }
+
+      .mobile-hero-visual::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("assets/mobile_hero_people.png");
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: center bottom;
+      }
+
+      .mobile-section-title {
+        margin: 0 0 22px;
+        text-align: center;
+        font-size: clamp(19px, 5.2vw, 22px);
+        font-weight: 900;
+        line-height: 1.35;
+        white-space: nowrap;
+      }
+
+      .mobile-section-title::before,
+      .mobile-section-title::after {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 2px;
+        margin: 0 6px 6px;
+        background: var(--brand);
+        transform: rotate(35deg);
+      }
+
+      .mobile-section-title::after {
+        transform: rotate(-35deg);
+      }
+
+      .problem-box {
+        border: 1.5px solid rgba(247, 181, 0, .5);
+        border-radius: 10px;
+        background: #fffdf7;
+        padding: 18px 18px 22px;
+      }
+
+      .problem-figure {
+        height: 186px;
+        margin: 0 auto 18px;
+        max-width: 230px;
+        background-image: url("assets/mobile_problem_owner_full.png");
+        background-size: contain;
+        background-position: 42% bottom;
+        background-repeat: no-repeat;
+      }
+
+      .check-list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .check-list li {
+        position: relative;
+        padding-left: 28px;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.55;
+      }
+
+      .check-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: .05em;
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--brand);
+        border-radius: 4px;
+        color: var(--brand);
+        font-size: 16px;
+        line-height: 14px;
+        text-align: center;
+      }
+
+      .services-grid {
+        display: grid;
+        gap: 0;
+        border: 1.5px solid rgba(247, 181, 0, .55);
+        border-radius: 10px;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .service-item {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 13px;
+        padding: 16px 15px;
+        border-bottom: 1px dashed rgba(247, 181, 0, .55);
+      }
+
+      .service-item:last-child {
+        border-bottom: 0;
+      }
+
+      .service-icon {
+        width: 52px;
+        height: 52px;
+        align-self: center;
+        border: 2px solid rgba(247, 181, 0, .65);
+        border-radius: 14px;
+        background-color: #fff8dc;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 38px auto;
+      }
+
+      .icon-home { background-image: url("assets/mobile_icon_home.png"); }
+      .icon-sns { background-image: url("assets/mobile_icon_sns.png"); }
+      .icon-meo { background-image: url("assets/mobile_icon_meo.png"); }
+      .icon-review { background-image: url("assets/mobile_icon_review.png"); }
+      .icon-photo { background-image: url("assets/mobile_icon_photo.png"); }
+      .icon-report { background-image: url("assets/mobile_icon_report.png"); }
+
+      .service-item h3 {
+        margin: 0 0 5px;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 1.35;
+      }
+
+      .service-item p {
+        margin: 0;
+        font-size: 13.5px;
+        font-weight: 700;
+        line-height: 1.7;
+      }
+
+      .price-card {
+        border-radius: 18px;
+        background: #fff;
+        padding: 22px 18px 24px;
+        box-shadow: 0 10px 24px rgba(154, 103, 0, .16);
+        text-align: center;
+      }
+
+      .price-ribbon {
+        display: inline-block;
+        margin: 0 0 16px;
+        padding: 8px 14px;
+        border-radius: 4px;
+        background: #ff7a1a;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .price-main {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: baseline;
+        justify-content: center;
+        gap: 8px;
+        margin: 0 0 12px;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 1.15;
+      }
+
+      .price-main strong {
+        color: #ff7a1a;
+        font-size: clamp(52px, 15vw, 64px);
+        line-height: .9;
+      }
+
+      .price-card p {
+        margin: 0;
+        font-size: 13.5px;
+        font-weight: 700;
+        line-height: 1.65;
+      }
+
+      .price-badges {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .price-badge {
+        display: grid;
+        place-items: center;
+        min-height: 104px;
+        border: 2px solid #fff;
+        border-radius: 28px;
+        background: #fff;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 1.12;
+      }
+
+      .price-badge strong {
+        display: block;
+        margin-top: 2px;
+        color: #ff7a1a;
+        font-size: 24px;
+      }
+
+      .mobile-footer-logo {
+        margin-bottom: 12px;
+      }
+
+      .mobile-footer-logo .mobile-logo-icon {
+        display: none;
+      }
+
+      .mobile-footer-logo .mobile-logo-text {
+        font-size: 22px;
+      }
+
+      .mobile-footer-links {
+        display: grid;
+        gap: 12px;
+        margin: 22px 0;
+      }
+
+      .mobile-footer-link {
+        display: block;
+        padding: 12px 14px;
+        border: 1px solid rgba(247, 181, 0, .45);
+        border-radius: 8px;
+        background: #fff;
+        color: #111;
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+        text-align: left;
+      }
+
+      .mobile-footer-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        margin-top: 18px;
+        border: 0;
+        border-radius: 999px;
+        background: #f7b500;
+        color: #111;
+        font-size: 16px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      @media (max-width: 374px) {
+        .mobile-head {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .mobile-brand {
+          font-size: 18px;
+        }
+
+        .mobile-tagline {
+          font-size: 9.5px;
+        }
+
+        .mobile-brand-divider {
+          height: 30px;
+        }
+
+        .mobile-menu {
+          width: 40px;
+          height: 40px;
+        }
+
+        .mobile-hero-body,
+        .mobile-problem,
+        .mobile-services,
+        .mobile-flow,
+        .mobile-footer {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .mobile-hero-title {
+          font-size: 26px;
+        }
+
+        .mobile-hero-visual {
+          height: 270px;
+        }
+
+        .service-item {
+          grid-template-columns: 50px 1fr;
+          gap: 10px;
+          padding-left: 13px;
+          padding-right: 13px;
+        }
+
+        .service-icon {
+          width: 46px;
+          height: 46px;
+          font-size: 12px;
+        }
+
+        .price-main {
+          font-size: 18px;
+        }
+      }
+
+      body.reveal-ready .mobile-page .mobile-section {
         opacity: 0;
         transform: translateY(28px);
         transition: opacity .7s ease, transform .7s ease;
         will-change: opacity, transform;
       }
 
-      body.reveal-ready .page .slice.is-visible {
+      body.reveal-ready .mobile-page .mobile-section.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
 
       @media (prefers-reduced-motion: reduce) {
-        body.reveal-ready .page .slice {
+        body.reveal-ready .mobile-page .mobile-section {
           opacity: 1;
           transform: none;
           transition: none;
@@ -333,6 +948,75 @@
       <h2 id="desktop-final-title">まずは無料でご相談ください</h2>
       <p>PC表示では、ヘッダー、悩みの共感、できること、月額3万円から、ご利用の流れ、フッターの順にスクロールして閲覧できます。</p>
     </div>
+  </main>
+
+  <main class="mobile-page" aria-label="ミセサポ365 スマホ用ランディングページ">
+    <section class="mobile-section mobile-hero mobile-image-section" aria-labelledby="mobile-fv-title">
+      <div class="mobile-image-wrap">
+        <img src="assets/mobile_section_hero.png" width="941" height="1672" alt="">
+        <button class="mobile-image-hotspot" style="left: 83.8%; top: 2.4%; width: 12.2%; height: 7.2%;" type="button" data-modal="menu" aria-label="メニューを開く">メニュー</button>
+      </div>
+      <div class="sr-only">
+        <h1 id="mobile-fv-title">SNSが得意なアルバイトを月額3万円から雇いませんか？</h1>
+        <p>ホームページ制作からSNS運用、口コミ対応まで、お店の面倒ごとをまるっと引き受けます。</p>
+      </div>
+    </section>
+
+    <section class="mobile-section mobile-problem" aria-labelledby="mobile-problem-title">
+      <div class="mobile-section-image">
+        <img src="assets/mobile_section_problem.png" width="1122" height="1402" alt="">
+      </div>
+      <div class="sr-only">
+        <h2 id="mobile-problem-title">こんなお悩みありませんか？</h2>
+        <p>SNSをやりたいけど時間がない、何を投稿すればいいかわからない、口コミやGoogleマップ対応が大変な方におすすめです。</p>
+      </div>
+    </section>
+
+    <section class="mobile-section mobile-services" aria-labelledby="mobile-benefit-title">
+      <div class="mobile-section-image">
+        <img src="assets/mobile_section_services.png" width="948" height="1659" alt="">
+      </div>
+      <div class="sr-only">
+        <h2 id="mobile-benefit-title">ミセサポ365ができること</h2>
+        <p>ホームページ制作、SNS運用代行、MEO対策、口コミ対応、写真・動画制作、レポート改善提案を行います。</p>
+      </div>
+    </section>
+
+    <section class="mobile-section mobile-price" aria-labelledby="mobile-price-title">
+      <div class="mobile-section-image">
+        <img src="assets/mobile_section_price.png" width="1374" height="1145" alt="">
+      </div>
+      <div class="sr-only">
+        <h2 id="mobile-price-title">毎月のサポートが月額3万円から</h2>
+        <p>いつでも相談OK、初期費用0円。内容やボリュームに合わせて柔軟に対応します。</p>
+      </div>
+    </section>
+
+    <section class="mobile-section mobile-flow" aria-labelledby="mobile-flow-title">
+      <div class="mobile-section-image">
+        <img src="assets/mobile_section_flow.png" width="971" height="1619" alt="">
+      </div>
+      <div class="sr-only">
+        <h2 id="mobile-flow-title">ご利用の流れ</h2>
+        <p>無料相談、ご提案・お見積り、サポート開始、レポート・改善の流れで進みます。</p>
+      </div>
+    </section>
+
+    <section class="mobile-section mobile-footer mobile-image-section" aria-labelledby="mobile-final-title">
+      <div class="mobile-image-wrap">
+        <img src="assets/mobile_section_footer.png" width="1024" height="1536" alt="">
+        <button class="mobile-image-hotspot" style="left: 6%; top: 19.5%; width: 88%; height: 8%;" type="button" data-modal="services" aria-label="サービスを見る">サービス</button>
+        <button class="mobile-image-hotspot" style="left: 6%; top: 28.8%; width: 88%; height: 8%;" type="button" data-modal="company" aria-label="運営者情報を見る">運営者情報</button>
+        <button class="mobile-image-hotspot" style="left: 6%; top: 38.3%; width: 88%; height: 8%;" type="button" data-modal="legal" aria-label="特定商取引法に基づく表記を見る">特定商取引法に基づく表記</button>
+        <button class="mobile-image-hotspot" style="left: 6%; top: 47.8%; width: 88%; height: 8%;" type="button" data-modal="privacy" aria-label="プライバシーポリシーを見る">プライバシーポリシー</button>
+        <button class="mobile-image-hotspot" style="left: 6%; top: 57.4%; width: 88%; height: 8%;" type="button" data-modal="contact" aria-label="お問い合わせへ進む">お問い合わせ</button>
+        <button class="mobile-image-hotspot" style="left: 6%; top: 69.2%; width: 88%; height: 10.5%; border-radius: 999px;" type="button" data-modal="contact" aria-label="無料で相談してみる">無料で相談してみる</button>
+      </div>
+      <div class="sr-only">
+        <h2 id="mobile-final-title">まずは無料でご相談ください</h2>
+        <p>無料相談ボタンから問い合わせフォームへ進みます。</p>
+      </div>
+    </section>
   </main>
 
   <main class="page" aria-label="ミセサポ365 ランディングページ">
@@ -511,7 +1195,7 @@
     let lastFocused = null;
 
     function setupMobileReveal() {
-      const slices = document.querySelectorAll(".page .slice");
+      const slices = document.querySelectorAll(".mobile-page .mobile-section");
       if (!slices.length) return;
 
       document.body.classList.add("reveal-ready");
